@@ -34,8 +34,6 @@ mul	$t3, $t0, $t1
 div 	$t4, $t0, $t1
 #resta
 sub  	$t5, $t0, $t1
-#promedio
-  	$t5, $t0, $t1
 #resultado
 li $v0, 4
 la $a0, rs
