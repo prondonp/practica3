@@ -1,0 +1,70 @@
+.data
+
+n1: .asciiz "\n Ingrese primer numero. \n"
+n2: .asciiz "\n Ingrese segundo numero. \n"
+rs: .asciiz "\n El resultado de suma. \n"
+rr: .asciiz "\n El resultado de resta. \n"
+rm: .asciiz "\n El resultado de multiplicacion. \n"
+rd: .asciiz "\n El resultado de division. \n"
+rp: .asciiz "\n El resultado de promedio. \n"
+.text
+#primer numero
+li $v0, 4
+la $a0, n1
+syscall
+#obtencion numero
+li $v0, 5
+syscall
+#numero1 a registro $t0
+move $t0, $v0
+#segundo numero
+li $v0, 4
+la $a0, n2
+syscall
+#obtencion numero
+li $v0, 5
+syscall
+#numero1 a registro $t0
+move $t1, $v0
+#suma
+add $t2, $t0, $t1
+#multiplicacion
+mul	$t3, $t0, $t1
+#division
+div 	$t4, $t0, $t1
+#resta
+sub  	$t5, $t0, $t1
+#promedio
+  	$t5, $t0, $t1
+#resultado
+li $v0, 4
+la $a0, rs
+syscall
+#imprime resultado
+li $v0,1
+move $a0, $t2
+syscall
+#resultado
+li $v0, 4
+la $a0, rr
+syscall
+#imprime resultado
+li $v0,1
+move $a0, $t5
+syscall
+#resultado
+li $v0, 4
+la $a0, rm
+syscall
+#imprime resultado
+li $v0,1
+move $a0, $t3
+syscall
+#resultado
+li $v0, 4
+la $a0, rd
+syscall
+#imprime resultado
+li $v0,1
+move $a0, $t4
+syscall
