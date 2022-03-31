@@ -1,0 +1,38 @@
+.data
+
+str1: .asciiz "\n TRIANGULO EXISTENTE. \n"
+str2: .asciiz "\n TRIANGULO NO EXISTENTE. \n"
+
+.text
+main:
+
+	la $v0, 5
+	syscall
+	move $t0, $v0
+	la $v0, 5
+	syscall
+	move $t1, $v0
+	la $v0, 5
+	syscall
+	move $t2, $v0
+	add $t3, $t0, $t1
+	add $t4, $t1, $t2
+	add $t5, $t0, $t2
+	bge $t3, $t2, L_I
+	L_E:		la $a0, str2
+	b E_L_I
+	L_I:
+	bge $t4, $t0, L_I2
+	L_E2:
+      la $a0, str2
+      b E_L_I
+    L_I2:
+      bge $t5, $t1, L_I3
+      L_E3:
+        la $a0, str2
+        b E_L_I
+      L_I3:
+        la $a0, str1
+	E_L_I:
+	li $v0, 4
+	syscall
