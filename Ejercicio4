@@ -1,0 +1,61 @@
+.data 
+    ingreso: .asciiz "\nIngrese numero: "
+    valor: .asciiz "\nEl numero " 
+    NoM: .asciiz " No es multiplo de: "
+    SiM: .asciiz " Es multiplo de: "
+.text 
+    main:       
+
+        #Ingreso
+        li $v0, 4 				
+        la $a0, ingreso		
+        syscall
+
+        #Valor ingresado
+        li $v0, 5 					
+        syscall
+        move $t9, $v0
+
+        #Iteraciones
+        li $t1, 1   
+	    li $t2, 21  
+	    move $t3, $v0  
+
+        Loop:
+            beq $t2,$t1, Exit
+
+            rem $t4, $t1, $t3
+            #Escribe el texto            
+            li $v0, 4 				
+            la $a0, valor		
+            syscall
+
+            move $a0, $t1
+            li $v0, 1 
+            syscall
+
+            beq  $t4, 0, L_I
+	
+            L_E:
+                #Escribe el texto            
+                li $v0, 4 				
+                la $a0, NoM 		
+                syscall
+                b E_L_I
+
+            L_I:
+                #Escribe el texto            
+                li $v0, 4 				
+                la $a0, SiM 		
+                syscall
+                
+            E_L_I:	
+                move $a0, $t9
+                li $v0, 1 
+                syscall
+
+
+
+            add $t1, $t1, 1  		
+            j Loop       
+	    Exit:
